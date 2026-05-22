@@ -10,6 +10,7 @@ This repo is intentionally scoped to **spatial UI helper infrastructure** only:
 
 - reusable helper-layer building blocks for spatial/world UI providers
 - shared target-resolution and surface-oriented utility code for future spatial adapters
+- shared helper-policy scaffolding for hover/capture behavior on spatial surfaces
 - package/testbed scaffolding for the new `aerobeat-spatial-ui-*` family
 
 This repo does **not** own or redefine:
@@ -20,6 +21,18 @@ This repo does **not** own or redefine:
 - concrete mouse/touch/XR provider behavior
 
 Those concerns stay in their owning repos. In particular, the canonical UI interaction contract remains in `aerobeat-input-core`.
+
+## Phase 1 boundary-freeze scaffolding
+
+Phase 1 adds package/runtime scaffolding that makes the ownership boundary concrete in code:
+
+- `src/helpers/surfaces/` — placeholder shared surface descriptors and target-resolution result helpers
+- `src/helpers/providers/` — placeholder shared projection and target-resolution helper bases
+- `src/helpers/policies/` — placeholder shared hover/capture policy helpers
+- `src/helpers/aero_spatial_ui_core_manifest.gd` — repo-local ownership manifest used by tests
+- `docs/phase-1-boundary-freeze.md` — human-readable boundary contract for this repo
+
+These placeholders are intentionally narrow. They mark where future shared helper logic belongs while explicitly refusing to define canonical contract types, native 2D bridge logic, event taxonomy ownership, or concrete mouse-provider behavior.
 
 ## 📋 Repository Details
 
