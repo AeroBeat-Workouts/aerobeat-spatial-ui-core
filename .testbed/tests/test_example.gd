@@ -1,12 +1,12 @@
 extends GutTest
 
-const MANIFEST_SCRIPT := preload("res://../src/helpers/aero_spatial_ui_core_manifest.gd")
-const SURFACE_DESCRIPTOR_SCRIPT := preload("res://../src/helpers/surfaces/aero_spatial_surface_descriptor.gd")
-const TARGET_RESULT_SCRIPT := preload("res://../src/helpers/surfaces/aero_spatial_target_resolution_result.gd")
-const TARGET_RESOLVER_BASE_SCRIPT := preload("res://../src/helpers/providers/aero_spatial_target_resolver_base.gd")
-const RECT_TARGET_RESOLVER_SCRIPT := preload("res://../src/helpers/providers/aero_spatial_rect_target_resolver.gd")
-const PROJECTION_HELPER_SCRIPT := preload("res://../src/helpers/providers/aero_spatial_projection_helper.gd")
-const HOVER_CAPTURE_POLICY_SCRIPT := preload("res://../src/helpers/policies/aero_spatial_hover_capture_policy.gd")
+const MANIFEST_SCRIPT := preload("res://addons/aerobeat-spatial-ui-core/src/helpers/aero_spatial_ui_core_manifest.gd")
+const SURFACE_DESCRIPTOR_SCRIPT := preload("res://addons/aerobeat-spatial-ui-core/src/helpers/surfaces/aero_spatial_surface_descriptor.gd")
+const TARGET_RESULT_SCRIPT := preload("res://addons/aerobeat-spatial-ui-core/src/helpers/surfaces/aero_spatial_target_resolution_result.gd")
+const TARGET_RESOLVER_BASE_SCRIPT := preload("res://addons/aerobeat-spatial-ui-core/src/helpers/providers/aero_spatial_target_resolver_base.gd")
+const RECT_TARGET_RESOLVER_SCRIPT := preload("res://addons/aerobeat-spatial-ui-core/src/helpers/providers/aero_spatial_rect_target_resolver.gd")
+const PROJECTION_HELPER_SCRIPT := preload("res://addons/aerobeat-spatial-ui-core/src/helpers/providers/aero_spatial_projection_helper.gd")
+const HOVER_CAPTURE_POLICY_SCRIPT := preload("res://addons/aerobeat-spatial-ui-core/src/helpers/policies/aero_spatial_hover_capture_policy.gd")
 
 func before_all():
 	gut.p("Starting Spatial UI Core Tests...")

@@ -101,4 +101,27 @@ godot --headless --path .testbed --script addons/gut/gut_cmdln.gd \
 - The current Phase 0 baseline intentionally pins only the repo-local test dependency needed for validation: GUT `main`.
 - Repo-local unit tests live under `.testbed/tests/`.
 - The current package shape is consumed from the repo root (`subfolder: "/"`) for downstream installs.
+- To catch installed-addon path regressions, stage the repo into the workbench as if it were a downstream addon before import/test, then run both the normal GUT suite and the installed-addon smoke script against that staged package:
+
+```bash
+rm -rf .testbed/addons/aerobeat-spatial-ui-core
+mkdir -p .testbed/addons/aerobeat-spatial-ui-core
+tar \
+  --exclude=.git \
+  --exclude=.godot \
+  --exclude=.beads \
+  --exclude=.dolt \
+  --exclude=.testbed/.addons \
+  --exclude=.testbed/.godot \
+  --exclude=.testbed/addons \
+  -cf - . | tar -xf - -C .testbed/addons/aerobeat-spatial-ui-core
+godot --headless --path .testbed --import
+godot --headless --path .testbed --script addons/gut/gut_cmdln.gd \
+  -gdir=res://tests \
+  -ginclude_subdirs \
+  -gexit
+godot --headless --path .testbed --script res://scripts/validate_installed_addon_paths.gd
+```
+
+- The CI workflow, the GUT suite, and the installed-addon smoke script all use that staged package flow so `res://addons/aerobeat-spatial-ui-core/...` runtime loading is verified in-repo.
 - Keep the repo description truthful: this package is a shared spatial helper layer, not a concrete provider and not a contract-definition repo.

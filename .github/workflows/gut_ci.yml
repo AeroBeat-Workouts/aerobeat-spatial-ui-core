@@ -38,6 +38,20 @@ jobs:
         working-directory: ./.testbed
         run: godotenv addons install
 
+      - name: 📦 Stage package like a downstream installed addon
+        run: |
+          rm -rf .testbed/addons/aerobeat-spatial-ui-core
+          mkdir -p .testbed/addons/aerobeat-spatial-ui-core
+          tar \
+            --exclude=.git \
+            --exclude=.godot \
+            --exclude=.beads \
+            --exclude=.dolt \
+            --exclude=.testbed/.addons \
+            --exclude=.testbed/.godot \
+            --exclude=.testbed/addons \
+            -cf - . | tar -xf - -C .testbed/addons/aerobeat-spatial-ui-core
+
       - name: 🧭 Import testbed project
         run: godot --headless --path .testbed --import
 
@@ -47,3 +61,6 @@ jobs:
             -gdir=res://tests \
             -ginclude_subdirs \
             -gexit
+
+      - name: 🔌 Smoke-test installed addon runtime loading
+        run: godot --headless --path .testbed --script res://scripts/validate_installed_addon_paths.gd

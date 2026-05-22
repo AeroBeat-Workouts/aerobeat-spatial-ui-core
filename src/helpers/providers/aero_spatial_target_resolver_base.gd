@@ -2,7 +2,8 @@
 extends RefCounted
 class_name AeroSpatialTargetResolverBase
 
-const TARGET_RESOLUTION_RESULT_SCRIPT = preload("res://../src/helpers/surfaces/aero_spatial_target_resolution_result.gd")
+
+const TARGET_RESOLUTION_RESULT_SCRIPT = preload("res://addons/aerobeat-spatial-ui-core/src/helpers/surfaces/aero_spatial_target_resolution_result.gd")
 
 ## Base helper for spatial/world surface target-resolution utilities.
 ##

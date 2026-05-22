@@ -1,5 +1,5 @@
 @tool
-extends "res://../src/helpers/providers/aero_spatial_target_resolver_base.gd"
+extends "res://addons/aerobeat-spatial-ui-core/src/helpers/providers/aero_spatial_target_resolver_base.gd"
 class_name AeroSpatialRectTargetResolver
 
 ## Shared helper resolver that maps projected authored-space points onto the
