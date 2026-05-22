@@ -1,30 +1,35 @@
-# AeroBeat Input Driver Template
+# AeroBeat Spatial UI Core
 
-This is the official template for creating an **Input Driver** repository within the AeroBeat ecosystem.
+This package is the shared **helper layer** for AeroBeat spatial/world UI adapters.
 
-An **Input Driver** turns device-specific signals into AeroBeat's shared input-lane contract. For the current AeroBeat v1 slice, the official gameplay path is **camera-first** for **Boxing** and **Flow**. Other device paths may still be worth preserving, but they should be documented truthfully as future/deprioritized work unless the specific repo is intentionally part of the live camera path.
+It exists to support repos like `aerobeat-spatial-ui-mouse` with reusable spatial-surface and provider-side utilities without turning this repo into a second contract owner.
 
 ## Current product truth
 
-Use this template against the locked AeroBeat v1 scope:
+This repo is intentionally scoped to **spatial UI helper infrastructure** only:
 
-- **official v1 gameplay:** Boxing and Flow
-- **official v1 gameplay input:** camera only
-- **current active input lane:** MediaPipe / camera-first
-- **non-camera gameplay inputs:** future work, not current parity promises
-- **mouse/touch:** valid for UI navigation, not gameplay parity claims
+- reusable helper-layer building blocks for spatial/world UI providers
+- shared target-resolution and surface-oriented utility code for future spatial adapters
+- package/testbed scaffolding for the new `aerobeat-spatial-ui-*` family
 
-This template stays intentionally bounded to the input-driver contract itself. It should teach downstream repos to declare the lane-specific shared addon they actually build against instead of implying one broad “AeroBeat Core contract” or equal-status device parity across webcams, controllers, wearables, and XR.
+This repo does **not** own or redefine:
+
+- the canonical UI interaction contract
+- input event taxonomy or bus semantics
+- native 2D bridge behavior
+- concrete mouse/touch/XR provider behavior
+
+Those concerns stay in their owning repos. In particular, the canonical UI interaction contract remains in `aerobeat-input-core`.
 
 ## 📋 Repository Details
 
-*   **Type:** Input Driver
-*   **License:** **Mozilla Public License 2.0 (MPL 2.0)**
-*   **Current baseline dependencies:**
-    *   `aerobeat-input-core` (Canonical shared input contract)
-    *   `gut` (Repo-local validation)
-*   **Optional additions:**
-    *   `aerobeat-vendor-*` or device-specific support packages when the concrete driver actually needs them
+- **Type:** Spatial UI Helper Layer
+- **License:** **Mozilla Public License 2.0 (MPL 2.0)**
+- **Current baseline dependencies:**
+  - `gut` (repo-local validation)
+- **Planned downstream consumers:**
+  - `aerobeat-spatial-ui-mouse`
+  - future `aerobeat-spatial-ui-touch` / `aerobeat-spatial-ui-xr` style adapter repos
 
 ## GodotEnv development flow
 
@@ -47,7 +52,7 @@ cd .testbed
 godotenv addons install
 ```
 
-That restores this repo's current dev/test manifest into `.testbed/addons/`. In the current lane-based architecture, input repos should describe their shared contract as `aerobeat-input-core`, not the older transition-era `aerobeat-core` key.
+That restores this repo's current dev/test manifest into `.testbed/addons/`.
 
 ### Open the workbench
 
@@ -57,7 +62,7 @@ From the repo root:
 godot --editor --path .testbed
 ```
 
-Use this `.testbed/` project as the canonical direct-development and bugfinding surface for input-driver work.
+Use this `.testbed/` project as the canonical direct-development and bugfinding surface for spatial-helper-layer work.
 
 ### Import smoke check
 
@@ -81,7 +86,7 @@ godot --headless --path .testbed --script addons/gut/gut_cmdln.gd \
 ### Validation notes
 
 - `.testbed/addons.jsonc` is the committed dev/test dependency contract.
-- The current template baseline intentionally pins only the lane-scoped shared contract needed for generic input-driver work: `aerobeat-input-core@v0.1.0` plus GUT `main`.
-- Repo-local unit tests live under `.testbed/tests/`; this repo's current package payload is rooted at `/`, so the workbench does not ship a `.testbed/src` bridge for this subset.
+- The current Phase 0 baseline intentionally pins only the repo-local test dependency needed for validation: GUT `main`.
+- Repo-local unit tests live under `.testbed/tests/`.
 - The current package shape is consumed from the repo root (`subfolder: "/"`) for downstream installs.
-- Keep product wording truthful: the template may be reused for future/non-camera drivers, but official v1 gameplay input remains camera-only.
+- Keep the repo description truthful: this package is a shared spatial helper layer, not a concrete provider and not a contract-definition repo.
