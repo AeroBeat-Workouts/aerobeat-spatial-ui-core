@@ -8,8 +8,13 @@ const TARGET_RESOLUTION_RESULT_SCRIPT = preload("res://../src/helpers/surfaces/a
 ##
 ## Concrete provider repos may subclass or wrap this helper to perform
 ## their own hit-testing and target mapping. This repo intentionally stops
-## at helper scaffolding and does not implement concrete mouse behavior.
+## at shared helper logic and does not implement concrete mouse behavior.
 
-func resolve_target(_surface, _world_hit):
-	push_warning("AeroSpatialTargetResolverBase.resolve_target() is helper scaffolding only. Implement concrete behavior in a provider repo.")
+func resolve_target(_surface, _projected_hit):
+	push_warning("AeroSpatialTargetResolverBase.resolve_target() is helper scaffolding only. Implement concrete provider behavior in a provider repo.")
 	return TARGET_RESOLUTION_RESULT_SCRIPT.new()
+
+func build_empty_result(surface_id: StringName = &""):
+	var result = TARGET_RESOLUTION_RESULT_SCRIPT.new()
+	result.surface_id = surface_id
+	return result

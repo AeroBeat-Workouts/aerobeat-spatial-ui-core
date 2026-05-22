@@ -22,17 +22,16 @@ This repo does **not** own or redefine:
 
 Those concerns stay in their owning repos. In particular, the canonical UI interaction contract remains in `aerobeat-input-core`.
 
-## Phase 1 boundary-freeze scaffolding
+## Phase 2 shared helper slice
 
-Phase 1 adds package/runtime scaffolding that makes the ownership boundary concrete in code:
+The first real extraction from the hybrid proof now lives here as a thin reusable helper layer:
 
-- `src/helpers/surfaces/` — placeholder shared surface descriptors and target-resolution result helpers
-- `src/helpers/providers/` — placeholder shared projection and target-resolution helper bases
-- `src/helpers/policies/` — placeholder shared hover/capture policy helpers
-- `src/helpers/aero_spatial_ui_core_manifest.gd` — repo-local ownership manifest used by tests
-- `docs/phase-1-boundary-freeze.md` — human-readable boundary contract for this repo
+- `src/helpers/surfaces/aero_spatial_surface_descriptor.gd` — authored-surface metadata and panel-UV → authored-space mapping helpers
+- `src/helpers/providers/aero_spatial_rect_target_resolver.gd` — generic rect-based target lookup against `aerobeat-ui-core` target specs
+- `src/helpers/providers/aero_spatial_projection_helper.gd` — neutral projected-hit shaping and projected-data assembly from already-known hits
+- `src/helpers/policies/aero_spatial_hover_capture_policy.gd` — shared hover/capture state bookkeeping helpers
 
-These placeholders are intentionally narrow. They mark where future shared helper logic belongs while explicitly refusing to define canonical contract types, native 2D bridge logic, event taxonomy ownership, or concrete mouse-provider behavior.
+This slice is intentionally narrow. It gives `aerobeat-spatial-ui-mouse` a real shared helper layer to build on next while leaving contract ownership, native 2D behavior, and concrete provider publishing outside this repo.
 
 ## 📋 Repository Details
 
